@@ -18,7 +18,6 @@ Follow these steps to get the project up and running on your local machine:
 
    ```bash
    git clone https://github.com/Al88/URLShortenerFront.git
-   cd your-project-directory
    ```
 
 2. **Install dependencies:**
