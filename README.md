@@ -3,8 +3,6 @@
 
 This is the frontend for the URL shortener application built with React. It communicates with the backend API to create and retrieve short URLs.
 
-![Descripción de la imagen](public/index.png)
-
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
@@ -43,6 +41,7 @@ The app will start on [http://localhost:3000](http://localhost:3000). Open this 
 ## Features
 
 - Create short URLs by entering the original URL.
+![Create short URL](public/index.png)
 - View a list of all previously created short URLs.
 - Access the original URL using the short code.
 
