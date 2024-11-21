@@ -17,7 +17,7 @@ Follow these steps to get the project up and running on your local machine:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://your-repository-url.git
+   git clone https://github.com/Al88/URLShortenerFront.git
    cd your-project-directory
    ```
 
