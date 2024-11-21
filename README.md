@@ -50,22 +50,6 @@ The app will start on [http://localhost:3000](http://localhost:3000). Open this 
 
 The frontend interacts with a backend API. Here is the [Swagger documentation](http://localhost:8000/api/documentation) for the backend API.
 
-### Endpoints
-
-- **POST** `/api/url`: Create a new short URL.
-  - Request body: `{ "original_url": "http://example.com" }`
-  - Response: `{ "url": "http://localhost:8000/api/url/abc123" }`
-- **GET** `/api/{shortCode}`: Retrieve the original URL by short code.
-  - Example: `/api/url/abc123`
-  - Response: `{ "url": "http://example.com" }`
-
-## Environment Variables
-
-You can configure environment variables in the `.env` file for specific settings such as API endpoints. Here’s an example:
-
-```
-REACT_APP_API_URL=http://localhost:8000/api
-```
 
 ## Build the Application
 
@@ -74,8 +58,15 @@ To build the application for production, run:
 ```bash
 npm run build
 ```
-
 This will create a `build` directory with the optimized production build. You can serve it using any static file server.
+
+
+To build the application for Development, run:
+
+```bash
+npm start
+```
+
 
 ## License
 
