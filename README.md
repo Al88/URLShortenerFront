@@ -43,8 +43,9 @@ The app will start on [http://localhost:3000](http://localhost:3000). Open this 
 - Create short URLs by entering the original URL.
 ![Create short URL](public/index.png)
 - View a list of all previously created short URLs.
+![List created short URLs](public/list.png)
 - Access the original URL using the short code.
-
+![Access the original URL](public/redirecting.png)
 
 ## API Documentation
 
