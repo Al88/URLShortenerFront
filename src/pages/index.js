@@ -9,38 +9,43 @@ export default function Index() {
     const [urls, setUrls] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function fetchUrls() {
-            try {
-                const response = await fetch(environment.API_URL + '/url');
-                const data = await response.json();
-                setUrls(data.urls);
-            } catch (error) {
-                console.error("Error fetching URLs:", error);
-            } finally {
-                setLoading(false);
-            }
+    async function fetchUrls() {
+        try {
+            const response = await fetch(environment.API_URL + '/url');
+            const data = await response.json();
+            setUrls(data.urls);
+        } catch (error) {
+            console.error("Error fetching URLs:", error);
+        } finally {
+            setLoading(false);
         }
+    }
 
-
+    useEffect(() => {
         fetchUrls();
+
+        const interval = setInterval(() => {
+            fetchUrls();
+        }, 40000);
+
+        return () => clearInterval(interval);
     }, []);
 
-        const deleteUrl = async (id) => {
-            try {
-                const response = await fetch(`${environment.API_URL}/url/${id}`, {
-                    method: 'DELETE',
-                });
+    const deleteUrl = async (id) => {
+        try {
+            const response = await fetch(`${environment.API_URL}/url/${id}`, {
+                method: 'DELETE',
+            });
 
-                if (response.ok) {
-                    setUrls(urls.filter((url) => url.id !== id));
-                } else {
-                    console.error("Failed to delete URL");
-                }
-            } catch (error) {
-                console.error("Error deleting URL:", error);
+            if (response.ok) {
+                setUrls(urls.filter((url) => url.id !== id));
+            } else {
+                console.error("Failed to delete URL");
             }
-        };
+        } catch (error) {
+            console.error("Error deleting URL:", error);
+        }
+    };
 
     return (
         <Card style={{ width: '48rem' }}>
@@ -73,12 +78,12 @@ export default function Index() {
                                         {url.original_url}
                                     </td>
                                     <td>
-                                        <a className="btn btn-outline-dark btn-sm mr1" href={`${environment.APP_URL}/${url.short_code}`}  target="_blank" >
+                                        <a className="btn btn-outline-dark btn-sm mr1" href={`${environment.APP_URL}/${url.short_code}`} target="_blank" >
                                             <i className="fa-solid fa-up-right-from-square"></i>
-                                         </a>
+                                        </a>
                                         <a className="btn btn-outline-dark btn-sm" onClick={() => deleteUrl(url.id)} >
                                             <i className="fa-solid fa-trash"></i>
-                                         </a>
+                                        </a>
                                     </td>
                                 </tr>
                             ))}
