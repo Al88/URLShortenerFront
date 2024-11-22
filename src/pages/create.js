@@ -15,27 +15,39 @@ export default function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
         if (isValidHttpUrl(url)) {
             try {
                 createShortUrl(url);
             } catch (error) {
                 console.error("Error fetching URLs:", error);
             } finally {
-                setLoading(false);
-                navigate('/list');
             }
         }
         setUrl('');
     };
 
     const createShortUrl = async (url) => {
-        const response = await fetch(environment.API_URL + '/url', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: url }),
-        });
-        return response.json();
+        try {
+            setLoading(true);
+            const response = await fetch(environment.API_URL + '/url', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: url }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Short URL created:', data);
+                // Redirigir a la ruta deseada, por ejemplo: '/success'
+                navigate('/list');
+            } else {
+                console.error('Failed to create short URL');
+            }
+            setLoading(false);
+
+        } catch (error) {
+            console.error('Error creating short URL:', error);
+        }
     };
 
     function isValidHttpUrl(s) {
